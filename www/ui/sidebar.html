@@ -1,0 +1,50 @@
+<check if="{{isset(@SESSION.user) && @SESSION.user!=''}}">
+    <div class="module">
+        <true>
+            <div class="page-header"><h3>Hi {{@SESSION.user}} !</h3></div>
+            <a class="btn btn-block btn-primary" href="post/create"><i class="icon-pencil icon-white"></i> Write a new post</a>
+            <a class="btn btn-block" href="logout"><i class="icon-off"></i> Logout</a>
+        </true>
+    </div>
+</check>
+
+<div class="module">
+    <div class="page-header">
+        <h3>Tags</h3>
+    </div>
+    <ul class="nav nav-pills nav-stacked">
+        <repeat group="{{@tagsList}}" value="{{@tag}}">
+            <check if="{{@tag}}">
+                <true>
+                    <li>
+                        <a href="{{@BASE}}/by/tag/{{@tag->_id}}">{{@tag->_id}} <span class="pull-right badge badge-info">{{@tag->value}}</span></a>
+                    </li>
+                </true>
+            </check>
+        </repeat>
+    </ul>
+</div>
+<div class="module">
+    <div class="page-header">
+        <h3>Feed</h3>
+    </div>
+    <ul class="nav nav-pills nav-stacked">
+        <li>
+            <a href="{{@BASE}}/rss">Last posts <i class="icon-rss pull-right"></i></a>
+        </li>
+    </ul>
+</div>
+ <check if="{{isset(@SESSION.messages.login.error) && @SESSION.messages.login.error!=''}}">
+    <true>
+        <div class="alert alert-error" id="message.login.error">
+            {{@SESSION.messages.login.error}}
+        </div>
+    </true>
+</check>
+<check if="{{isset(@SESSION.user) && @SESSION.user!=''}}">
+    <false>
+        <div class="module">
+        <include href="login.html" />
+        </div>    
+    </false>
+</check>

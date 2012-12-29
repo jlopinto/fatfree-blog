@@ -1,0 +1,11 @@
+<check if="{{isset(@SESSION.messages.general)}}">
+    <true>
+        <repeat group="{{@SESSION.messages.general}}" value="{{@messages}}" key="{{@type}}">
+            <repeat group="{{@messages}}" value="{{@message}}">
+                <div class="alert alert-{{@type}} fade in">
+                    {{@message|raw}} <a class="close" data-dismiss="alert" href="#">&times;</a>
+                </div>
+            </repeat>
+        </repeat>
+    </true>
+</check>

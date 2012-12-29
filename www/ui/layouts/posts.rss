@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+	<title>{{@blog.title}} </title>
+	<link>{{@REALM}}</link>
+	<description></description>
+	<lastBuildDate>{{date(@blog.date.rss)}}</lastBuildDate>
+	<language>{{@LANGUAGE}}</language>
+	<atom:link href="{{@REALM}}" rel="self" type="application/rss+xml" />
+	<repeat group="{{@posts}}" key="{{@key}}" value="{{@post}}">
+	<item>
+	    <title>{{@post->title}} </title>
+	    <pubDate>{{date(@blog.date.rss, @post->date->sec)}}</pubDate>
+		<link>http://studio{{@BASE}}/post/{{@post->_id}}/{{tools::slug(@post->title)}}</link>
+		<guid>http://studio{{@BASE}}/post/{{@post->_id}}</guid>  
+		<description><![CDATA[ {{substr(strip_tags(@post->content),0,256)}} ]]></description>
+	</item>
+	</repeat>
+</channel>
+</rss>

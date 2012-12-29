@@ -1,0 +1,31 @@
+# Enable rewrite engine and route requests to framework
+RewriteEngine On
+RewriteBase /F3blog
+RewriteCond %{REQUEST_FILENAME} !-l
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule .* index.php [L,QSA]
+
+# preserve bandwidth for PHP enabled servers
+<ifmodule mod_php4.c>
+ php_value zlib.output_compression 16386
+</ifmodule>
+# pass the default character set
+AddDefaultCharset utf-8
+# disable the server signature
+ServerSignature Off
+
+# cache text, css, and javascript files for one week
+<FilesMatch ".(js|css|pdf|txt)$">
+Header set Cache-Control "max-age=604800"
+</FilesMatch>
+
+# cache images and flash content for one month
+<FilesMatch ".(flv|gif|jpg|jpeg|png|ico|swf)$">
+Header set Cache-Control "max-age=2592000"
+</FilesMatch>
+
+#Gzip
+<ifmodule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/text text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
+</ifmodule>

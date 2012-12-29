@@ -1,0 +1,34 @@
+<form action="" method="post">
+    <fieldset>
+        <legend>Write a new post</legend>
+        
+        <label for="post_title">Title</label>
+        <input type="text" class="input-block-level" name="title" id="post_title" value="{{(isset(@postData->title)? @postData->title : '' )}}" placeholder="Type title here" />
+        
+        <label for="post_title">Date</label>
+        <input type="text" class="input-block-level" name="date" id="post_title" value="{{ date(@blog.date.set, isset(@postData->date->sec) ? @postData->date->sec : time())}}" />
+        
+        <label for="post_content">Your post</label>
+        <textarea id="post_content" class="input-block-level" name="content" placeholder="Type your post here">{{ isset(@postData->content)? @postData->content : ''}}</textarea>
+         <span class="help-block">Allowed HTML tags: <code>{{str_replace(';',',', @blog.post.allowed_tags)}}</code></span>
+        
+        
+        <label for="post_tags">Tags</label>
+        <input type="text" value="{{implode(',', isset(@postData->tags)? @postData->tags : array(''))}}"" name="tags" class="input-block-level" id="post_tags" placeholder="Type categories here. ex: seo, css, php" />
+        
+        <label for="post_categories">State</label>
+        <label class="radio"><input type="radio" name="state" value="0" {{ (isset(@postData->state)) ? (@postData->state==0)? 'checked="checked"' : '' : ''}} />Draft </label>
+        <label class="radio"><input type="radio" name="state" value="1" {{ (isset(@postData->state)) ? (@postData->state==1)? 'checked="checked"' : '' : 'checked="checked"'}} />Published </label>
+        
+        
+        <div class="form-actions">
+            <div class="pull-right">
+                <input type="submit" class="btn btn-primary" value="save" name="smbtBt" />
+                 <a class="btn" href="" >Cancel</a>
+                <input type="hidden" value="1" name="createPost" />
+             <input type="hidden" name="id" value="{{ isset(@postData->_id) ? @postData->_id : ''}}" name="createPost" />
+            </div>
+        </div>
+        
+    </fieldset>    
+</form>

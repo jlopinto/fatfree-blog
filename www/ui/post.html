@@ -1,0 +1,68 @@
+<div class="post">
+     <check if="{{@view=='loop'}}">
+            <true>
+                <div class="page-header">
+                <include href="admin-post-actions.html" />
+                <h2><a href="{{@BASE}}/post/{{@post->_id}}/{{tools::slug(@post->title)}}">{{@post->title}} <span><i class="icon-share-alt"></i></span></a></h2>
+                </div>
+                <div class="post-content">
+                    {{tools::summarize(@post->content, 40)}} 
+                    <a class="read-more" href="{{@BASE}}/post/{{@post->_id}}/{{tools::slug(@post->title)}}">Read this post <span><i class="icon-share-alt"></i></span></a>
+                </div>
+                <div class="post-infos">
+                    <span><i class="icon-calendar"></i> {{date(@blog.date.read, @post->date->sec)}}</span> | 
+                    Tags: 
+                    <repeat group="{{@post->tags}}" value="{{@tag}}">
+                        <check if="{{@tag}}">
+                            <true><a href="{{@BASE}}/by/tag/{{@tag}}"><i class="icon-tag"></i> {{@tag}}</a></true>
+                        </check>
+                    </repeat> |
+                    <span><i class="icon-comment"></i> Comments (0)</span>
+                </div>
+            </true>
+            <false>
+                  <div class="page-header">
+                <h2>{{@post->title}}</h2>
+                 <include href="admin-post-actions.html" />
+                </div>
+                <div class="post-content">{{@post->content}}</div>
+                <div class="post-infos">
+                    <small class="inline">posted on {{date(@blog.date.read, @post->date->sec)}}</small> | 
+                    Tags: 
+                    <repeat group="{{@post->tags}}" value="{{@tag}}">
+                        <check if="{{@tag}}">
+                           <true><a href="{{@BASE}}/by/tag/{{@tag}}"><i class="icon-tag"></i> {{@tag}}</a></true>
+                        </check>
+                    </repeat>
+                    <div><a href="{{@SCHEME}}://{{@HEADERS.Host}}{{@URI}}">link this post</a> : <code>{{@SCHEME}}://{{@HEADERS.Host}}{{@URI}}</code></div>
+                </div>
+                <hr >
+                <check if="{{count(@post->replies)>0}}">
+                    <true>
+                        <h4>Comments</h4>
+                        <ul class="post-reply">
+                            <repeat group="{{@post->replies}}" value="{{@reply}}">
+                                <li>{{@reply}}</li>
+                            </repeat>
+                        </ul>   
+                    </true>
+                    <false>
+                        <p class="alert alert-info">No comment for now !</p>
+                    </false>
+                </check>
+                <form>
+                    <fieldset>
+                        <legend>Add a comment</legend>
+                        <label>Name</label>
+                        <input class="input-block-level" type="text" />
+                        
+                        <label for="comment-input">Comment</label>
+                        <textarea name="comment-input" class="input-block-level" placeholder="Nothing to say ?"></textarea>
+                        <div class="form-actions">
+                            <input type="submit" name="" class="btn btn-primary pull-right" value="send" />
+                        </div>
+                    </fieldset>
+                </form>
+            </false>
+     </check>
+</div>

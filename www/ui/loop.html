@@ -1,0 +1,27 @@
+
+<div class="posts">
+    <check if="{{@posts}}">
+        <true>
+            <repeat group="{{@posts}}" key="{{@key}}" value="{{@post}}">
+                <include href="post.html" />
+            </repeat>
+            <div class="pagination pagination-centered">
+                <ul>             
+                    <loop from="{{@page=0}}" to="{{@page < @pagination.count}}" step="{{@page++}}">
+                        <li {{ (@pagination.active === (@page)) ? 'class="active"' : '' }}>
+                            <a  href="{{@pagination.link}}page/{{@page+1}}">{{@page+1}}</a>
+                        </li>
+                    </loop>
+                </ul>
+            </div>
+        </true>
+        <false>
+            <div class="post">
+                <h2>No post yet :|</h2>
+                <div class="post-content">
+                    Start now ! <a href="{{@BASE}}/post/create">Create your first post</a>
+                </div>
+            </div>
+        </false>
+    </check>
+</div>
