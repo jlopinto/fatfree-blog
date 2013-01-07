@@ -1,0 +1,12 @@
+<h3><i class="icon-tags"></i> Tags</h3><hr/>
+<ul class="nav nav-pills nav-stacked">
+    <repeat group="{{@tagsList}}" value="{{@tag}}">
+        <check if="{{@tag}}">
+            <true>
+                <li>
+                    <a href="{{@BASE}}/by/tag/{{@tag->_id}}">{{@tag->_id}} <span class="pull-right badge badge-info">{{@tag->value}}</span></a>
+                </li>
+            </true>
+        </check>
+    </repeat>
+</ul>

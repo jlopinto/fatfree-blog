@@ -1,0 +1,86 @@
+h1, h2, h3 {font-family: 'Lato', sans-serif;}
+a:hover {text-decoration: none}
+textarea {resize: vertical}
+header {
+    margin: 20px 0 20px 0;
+    padding: 10px 0;
+}
+
+header .home i:before{
+    font-size: 60px;
+    line-height: 74px;    
+}
+
+
+header h1{overflow:hidden}
+header h1 a{
+    margin-left:-60px;
+    transition: margin-left .5s ease-in-out
+}
+header h1 a:hover{margin-left:0}
+
+.hero-unit {
+    box-shadow: 4px 4px 4px #DFDFDF;
+    padding:30px;
+    border-radius: 0;
+    border:1px solid #DFDFDF
+}
+
+.hero-unit p{
+    margin:10px 0 20px;
+    color:#999999
+}
+
+
+.post, .module {
+    border: 1px solid transparent;
+    margin: 0 0 3em 0;
+    padding: 0 1em 1em;
+    position: relative
+}
+
+.posts  .post:hover,
+.module {
+    box-shadow: 4px 4px 4px #DFDFDF;
+    background-color: #fff;
+    border: 1px solid #DFDFDF
+}
+
+.posts .post {
+    transition-property: border-color, box-shadow;
+    transition-duration: .2s;
+    transition-timing-function: ease-in-out
+}
+.posts h2 a {display: block}
+.post-more{word-break: keep-all}
+.post-more span, .post h2 span {visibility: hidden}
+.post-more:hover span, .post h2 a:hover span {visibility: visible}
+.post h2 span i {vertical-align: middle}
+.post-content {padding: 0 0 2em}
+.post .admin-controls {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    display: inline-block;
+    visibility: hidden
+}
+.post:hover .admin-controls {visibility: visible}
+
+.post-draft {
+    background: url('../../assets/img/draft.png') repeat-y 99% 7px;
+    border: 1px dashed #ccc;
+}
+
+.module li [class*="icon-"]:before{vertical-align: -6px}
+
+footer{
+    margin-top:40px;
+    border-top:1px solid #DFDFDF;
+    background-color: #EEEEEE;
+    padding:40px 0
+}
+/*
+.icon-valid:before{color:#51A351}
+.icon-danger:before{color:#DA4F49}
+.icon-info:before{color:#49AFCD}
+*/

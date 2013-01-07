@@ -1,9 +1,0 @@
-<check if="{{@SESSION.user}}">
-    <true>
-        <div class="admin-controls">
-            <a href="post/update/{{@post->_id}}" class="btn " title="Update" ><i class="icon-pencil"></i></a>
-            <a href="post/state/{{@post->_id}}"  class="btn" title="Unpublish" data-toggle="yesno" data-question="Unpublish this post ?"><i class="icon-exclamation-sign"></i></a>
-            <a href="post/delete/{{@post->_id}}" class="btn" title="Delete" data-toggle="yesno" data-question="Delete this post ?"><i class="icon-trash"></i></a>
-        </div>
-    </true>
-</check>

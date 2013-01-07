@@ -1,0 +1,25 @@
+<div class="row">
+    <!-- Main content -->
+    <div class="span8">
+        <include href="components/alerts.html" />
+        <include href="{{@view.'.html'}}" />
+    </div>
+    <!-- Sidebar -->
+    <div class="span4">
+        <div class="module">
+            <include href="components/tags.html" />
+        </div>
+        <div class="module">
+            <h3><i class=" icon-rss"></i> Feed</h3>
+            <hr />
+            <ul class="nav nav-pills nav-stacked">
+                <li>
+                    <a href="{{@BASE}}/rss">Last posts <i class="icon-rss pull-right"></i></a>
+                </li>
+            </ul>
+        </div>
+         <div class="module">
+            <include href="components/admin.html" />
+        </div>
+    </div>
+</div>

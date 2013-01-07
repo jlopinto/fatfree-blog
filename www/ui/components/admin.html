@@ -1,0 +1,25 @@
+<check if="{{isset(@SESSION.user) && @SESSION.user!=''}}">
+    <true>
+        <h3>Hi {{@SESSION.user}} !</h3><hr />
+        <a class="btn btn-block btn-primary" href="post/create"><i class="icon-pencil icon-white"></i> Write a new post</a>
+        <a class="btn btn-block" href="logout"><i class="icon-off"></i> Logout</a>
+    </true>
+    <false>
+        <div class="login-form">
+            <h3><i class="icon-user"></i> Login</h3><hr />
+            <form action="{{@BASE}}/login" method="post">
+                <fieldset>
+                    <div class="clearfix">
+                        <input type="text" class="input-block-level" placeholder="Username" name="id">
+                    </div>
+                    <div class="clearfix">
+                        <input type="password" class="input-block-level" placeholder="Password" name="pwd">
+                    </div>
+                    <button class="btn primary btn-block" type="submit">
+                        Sign in
+                    </button>
+                </fieldset>
+            </form>
+        </div>
+    </false>
+</check>

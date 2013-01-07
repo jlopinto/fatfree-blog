@@ -1,0 +1,35 @@
+
+
+<div class="posts">
+    <check if="{{isset(@posts)}}">
+        <true>
+            <repeat group="{{@posts}}" key="{{@key}}" value="{{@post}}">
+                <include href="components/post.html" />
+            </repeat>
+            <div class="pagination pagination-centered">
+                <ul>
+                    <loop from="{{@page=0}}" to="{{@page < @pagination.count}}" step="{{@page++}}">
+                        <li {{ (@pagination.active === (@page)) ? 'class="active"' : '' }}>
+                            <a  href="{{@pagination.link}}page/{{@page+1}}">{{@page+1}}</a>
+                        </li>
+                    </loop>
+                </ul>
+            </div>
+        </true>
+        <false>
+            <check if="{{isset(@post)}}">
+                <true>
+                    <include href="components/post.html" />
+                </true>
+                <false>
+                    <div class="post">
+                        <h2>No post yet / no more page</h2>
+                        <div class="post-content">
+                            Start now ! <a href="{{@BASE}}/post/create">Create your first post</a>
+                        </div>
+                    </div>
+                </false>
+            </check>
+        </false>
+    </check>
+</div>

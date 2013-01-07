@@ -1,0 +1,21 @@
+<h2>{{@fatfree}} features covered by this blog</h2>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Feature</th>
+            <th>Used</th>
+            <th>Unit test</th>
+        </tr>
+    </thead>
+    <tbody>
+        <repeat group="{{ @covered }}" counter="{{ @ctr }}" value="{{ @feature }}">
+            <tr>
+                <td>{{@ctr + 1}}</td>
+                <td>{{ucfirst(@feature.0)}}</td>
+                <td class="center"><i class="{{ ((int)@feature.1===1)? 'icon-circle' :'icon-circle-blank' }}"></i></td>
+                <td><a target="_blank" href="https://github.com/bcosca/fatfree/blob/dev/app/{{@feature.0}}.php"><i class="icon-link"></i></a></td>
+            </tr>
+        </repeat>
+    </tbody>
+</table>

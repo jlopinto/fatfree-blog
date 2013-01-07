@@ -18,7 +18,7 @@ namespace DB\Mongo;
 //! MongoDB mapper
 class Mapper extends \DB\Cursor {
 
-	private
+	protected
 		//! MongoDB wrapper
 		$db,
 		//! Mongo collection
@@ -255,6 +255,16 @@ class Mapper extends \DB\Cursor {
 		foreach ($this->document as $key=>$field)
 			$var[$key]=$field;
 	}
+	
+		
+	/**
+		Run the passed mapReduce command
+		@return ?
+		@param $mapReduce
+	**/
+	function mapReduce($mapReduce = null) {
+		return $this->db->command($mapReduce);	
+	}
 
 	/**
 		Instantiate class
@@ -263,20 +273,9 @@ class Mapper extends \DB\Cursor {
 		@param $collection string
 	**/
 	function __construct(\DB\Mongo $db,$collection) {
-		
 		$this->db=$db;
 		$this->collection=$db->selectcollection($collection);
 		$this->reset();
-	}
-	
-	/**
-		Return records that match criteria
-		@return array
-		@param $filter array
-		@param $options array
-	**/
-	function mapReduce($mapReduce = null) {
-		return $this->db->command($mapReduce);	
 	}
 
 }

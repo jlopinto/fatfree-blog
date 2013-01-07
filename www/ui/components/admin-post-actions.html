@@ -1,0 +1,9 @@
+<check if="{{isset(@SESSION.user) && @SESSION.user!=''}}">
+    <true>
+        <div class="admin-controls">
+            <a href="post/update/{{@post->_id}}" class="btn btn btn-primary" title="Update" ><i class="icon-pencil"></i></a>
+            <a href="post/state/{{@post->_id}}"  class="btn {{(@post->state===1)? 'btn-warning' : 'btn-success' }}" title="Unpublish" data-toggle="yesno" data-question="{{(@post->state===1)? 'Unpublish this post ?' : 'Publish this post ?' }}"><i class="{{(@post->state===1)? 'icon-lock' : 'icon-unlock' }}"></i></a>
+            <a href="post/delete/{{@post->_id}}" class="btn btn-danger" title="Delete" data-toggle="yesno" data-question="Delete this post ?"><i class="icon-trash"></i></a>
+        </div>
+    </true>
+</check>

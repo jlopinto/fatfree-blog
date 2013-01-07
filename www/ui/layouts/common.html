@@ -1,54 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <base href="{{@$BASE}}/" />
+        <base href="{{@root_url}}" />
         <title>{{@blog.title}}</title>
-        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" /> 
-        <!-- <link rel="stylesheet" href="{{@$BASE}}/minify/css?files=assets/css/bootstrap.css,assets/css/bootstrap-responsive.css,assets/css/font-awesome.css,assets/css/font-awesome-ie7.css,assets/css/blog.css" type="text/css" /> -->
-        <link rel="stylesheet" href="ui/assets/css/bootstrap.css" type="text/css" />
-        <link rel="stylesheet" href="ui/assets/css/bootstrap-responsive.css" type="text/css" />
-        <link rel="stylesheet" href="ui/assets/css/blog.css" type="text/css" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+        <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700,900' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{{@BASE}}/minify/css?files=css/bootstrap.css,css/bootstrap-responsive.css,css/blog.css" type="text/css" />
     </head>
     <body>
-
-        <header>
-            <div class="container">
-                <div class="row">
-                    <div class="span12">
-                        <ul class="nav nav-pills pull-right">
-                            <li class="active">
-                                <a href="{{@BASE}}">Blog</a>
-                            </li>
-                            <!-- <li>
-                                <a href="documentation">Documentation</a>
-                            </li> -->
-                            <li>
-                                <a href="about">About</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="span12">
-                        <div class="brand">
-                            <h1>{{@blog.title}}</h1>
-                            <p>{{@blog.description}}</p>
-                            <img alt="{{@PACKAGE}}" src="ui/assets/img/logo.png" width="150" height="150" class="logo img-polaroid pull-left" />
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <div class="container">
+            <header class="hero-unit clearfix">
+                    <h1><a href="{{@root_url}}" class="home"><i class="icon-home"></i> {{@blog.title}}</a></h1>
+                    <p>
+                        &quot;The&quot; Fatfree demo blog rebuilt using {{@PACKAGE}} 3+
+                    </p>
+                    <p class="lead">
+                        <a href="https://github.com/bcosca/fatfree" class="btn btn-large btn-primary"><i class="icon-github"></i> &nbsp; {{@PACKAGE}} on github</a>
+                        <a href="https://github.com/blo4r/fatfree-blog" class="btn btn-large "><i class="icon-github"></i> &nbsp; {{@fatfree}} blog sources on github</a>
+                    </p>
+             
+        </div>
         </header>
         <div class="container">
-            <include href="{{'layouts/'.@content.'.html'}}" />
-            <hr/>
-            <footer>Powered by {{@PACKAGE}} - {{@VERSION}}</footer>
+            <include href="{{@content.'.html'}}" />            
         </div>
-        <include href="layouts/yesno-modal.html" />
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <span class="span4">
+                         <h4><i class="icon-info-sign"></i> About this blog</h4>
+                        <hr/>
+                        <p>A simple demo blog powered by {{@PACKAGE}}, a tiny & elegant PHP 5.3+ framework.</p>
+                    </span>
+                    <span class="span4">
+                         <h4>Blog review</h4>
+                           <hr/>
+                         <ul class="nav nav-stacked nav-pills">
+                            <li>
+                                <a href="Features">Blog Features <i class="icon-check pull-right"></i></a>
+                            </li>
+                            <li>
+                                <a href="Cookbook">Blog Cookbook <i class="icon-beaker pull-right"></i></a>
+                            </li>
+                            <li>
+                                <a href="Covered">Framework covered features <i class="icon-tasks pull-right"></i></a>
+                            </li>
+                         </ul>
+                    </span>
+                    <span class="span4">
+                        <h4>Usefull {{@fatfree}} links</h4>
+                          <hr/>
+                    </span>
+                </div>
+                <hr />
+                <small class=" pull-right">Running version <span class="badge badge-inverse">{{@VERSION}}</span></small>
+                </div>
+        </footer>
+        <include href="components/yesno-modal.html" />
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
         <!-- <script src="{{@$BASE}}/minify/js?files=assets/js/bootstrap.min.js,assets/js/blog.js"></script> -->
-        <script src="ui/assets/js/bootstrap.min.js"></script>
-        <script src="ui/assets/js/blog.js"></script>
+        <script src="assets/js/bootstrap.min.js"></script>
+        <script src="assets/js/blog.js"></script>
+        <!-- <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-7975584-6']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+        })();
+
+        </script> -->
     </body>
 </html>

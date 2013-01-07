@@ -1,0 +1,87 @@
+<div class="post {{(@post->state < 1)? 'post-draft' : '' }}">
+    <check if="{{isset(@posts)}}">
+        <true>
+            <div>
+                <include href="components/admin-post-actions.html" />
+                <h2><a href="{{@BASE}}/post/{{@post->_id}}/{{tools::slug(@post->title)}}">{{@post->title}} <span><i class="icon-link"></i></span></a></h2>
+                <hr/>
+            </div>
+            <div class="post-content">
+                {{tools::summarize(@post->content, 40)}}
+                <a class="post-more" href="{{@BASE}}/post/{{@post->_id}}/{{tools::slug(@post->title)}}">Read this post <span><i class="icon-link"></i></span></a>
+            </div>
+            <div class="post-infos">
+                <span><i class="icon-calendar"></i> {{date(@blog.date.read, @post->date->sec)}}</span> &ndash;
+                <i class="icon-tags"></i> 
+                <repeat group="{{@post->tags}}" value="{{@tag}}">
+                    <check if="{{@tag}}">
+                        <true>
+                            <a href="{{@BASE}}/by/tag/{{@tag}}" class="badge badge-info">{{@tag}}</a>
+                        </true>
+                    </check>
+                </repeat>    
+                &ndash; <span><i class="icon-comment"></i> Comments (0)</span>
+            </div>
+        </true>
+        <false>
+            <div class="page-header">
+                <h2>{{@post->title}}</h2>
+                <small class="inline"><strong>posted on</strong> : {{date(@blog.date.read, @post->date->sec)}}</small>
+                <include href="components/admin-post-actions.html" />
+            </div>
+            <div class="post-content">
+                {{@post->content}}
+            </div>
+            
+            <hr >
+            
+            <div class="post-infos">
+                <p><i class="icon-tags"></i> 
+                <repeat group="{{@post->tags}}" value="{{@tag}}">
+                    <check if="{{@tag}}">
+                        <true>
+                            <a href="{{@BASE}}/by/tag/{{@tag}}" class="badge badge-info">{{@tag}}</a>
+                        </true>
+                    </check>
+                </repeat>    
+                </p>
+                <p>
+                    <a href="{{@SCHEME}}://{{@HEADERS.Host}}{{@URI}}"> <i class="icon-link"></i></a> <code>{{@SCHEME}}://{{@HEADERS.Host}}{{@URI}}</code>
+                </p>
+            </div>
+             <hr >
+            <check if="{{count(@post->replies)>0}}">
+                <true>
+                    <h4>Comments</h4>
+                    <ul class="post-reply">
+                        <repeat group="{{@post->replies}}" value="{{@reply}}">
+                            <li>
+                                {{@reply}}
+                            </li>
+                        </repeat>
+                    </ul>
+                </true>
+                <false>
+                    <p class="alert alert-info">
+                        No comment for now !
+                    </p>
+                </false>
+            </check>
+            <form>
+                <fieldset>
+                    <legend>
+                        Add a comment
+                    </legend>
+                    <label>Name</label>
+                    <input class="input-block-level" type="text" />
+
+                    <label for="comment-input">Comment</label>
+                    <textarea name="comment-input" class="input-block-level" placeholder="Nothing to say ?"></textarea>
+                    <div class="form-actions">
+                        <input type="submit" name="" class="btn btn-primary pull-right" value="send" />
+                    </div>
+                </fieldset>
+            </form>
+        </false>
+    </check>
+</div>
