@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Copyright (c) 2009-2012 F3::Factory/Bong Cosca, All rights reserved.
+	Copyright (c) 2009-2014 F3::Factory/Bong Cosca, All rights reserved.
 
 	This file is part of the Fat-Free Framework (http://fatfree.sf.net).
 
@@ -25,15 +25,19 @@ class Jig {
 	//@}
 
 	protected
+		//! UUID
+		$uuid,
 		//! Storage location
 		$dir,
 		//! Current storage format
-		$format;
+		$format,
+		//! Jig log
+		$log;
 
 	/**
-		Read data from file
-		@return array
-		@param $file
+	*	Read data from file
+	*	@return array
+	*	@param $file string
 	**/
 	function read($file) {
 		$fw=\Base::instance();
@@ -52,16 +56,16 @@ class Jig {
 	}
 
 	/**
-		Write data to file
-		@return int
-		@param $file string
-		@param $data array
+	*	Write data to file
+	*	@return int
+	*	@param $file string
+	*	@param $data array
 	**/
 	function write($file,array $data=NULL) {
 		$fw=\Base::instance();
 		switch ($this->format) {
 			case self::FORMAT_JSON:
-				$out=json_encode($data);
+				$out=json_encode($data,@constant('JSON_PRETTY_PRINT'));
 				break;
 			case self::FORMAT_Serialized:
 				$out=$fw->serialize($data);
@@ -71,24 +75,58 @@ class Jig {
 	}
 
 	/**
-		Clean storage
-		@return NULL
+	*	Return directory
+	*	@return string
 	**/
-	function drop() {
-		$fw=\Base::instance();
-		foreach (glob($this->dir.'/*',GLOB_NOSORT) as $file)
-			@$fw->unlink($file);
+	function dir() {
+		return $this->dir;
 	}
 
 	/**
-		Instantiate class
-		@param $dir string
-		@param $format int
+	*	Return UUID
+	*	@return string
+	**/
+	function uuid() {
+		return $this->uuid;
+	}
+
+	/**
+	*	Return SQL profiler results
+	*	@return string
+	**/
+	function log() {
+		return $this->log;
+	}
+
+	/**
+	*	Jot down log entry
+	*	@return NULL
+	*	@param $frame string
+	**/
+	function jot($frame) {
+		if ($frame)
+			$this->log.=date('r').' '.$frame.PHP_EOL;
+	}
+
+	/**
+	*	Clean storage
+	*	@return NULL
+	**/
+	function drop() {
+		if ($glob=@glob($this->dir.'/*',GLOB_NOSORT))
+			foreach ($glob as $file)
+				@unlink($file);
+	}
+
+	/**
+	*	Instantiate class
+	*	@param $dir string
+	*	@param $format int
 	**/
 	function __construct($dir,$format=self::FORMAT_JSON) {
 		if (!is_dir($dir))
 			mkdir($dir,\Base::MODE,TRUE);
-		$this->dir=$dir;
+		$this->uuid=\Base::instance()->hash($this->dir=$dir);
 		$this->format=$format;
 	}
 

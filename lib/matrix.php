@@ -1,7 +1,7 @@
 <?php
 
 /*
-	Copyright (c) 2009-2012 F3::Factory/Bong Cosca, All rights reserved.
+	Copyright (c) 2009-2014 F3::Factory/Bong Cosca, All rights reserved.
 
 	This file is part of the Fat-Free Framework (http://fatfree.sf.net).
 
@@ -17,11 +17,11 @@
 class Matrix extends Prefab {
 
 	/**
-		Retrieve values from a specified column of a multi-dimensional
-		array variable
-		@return array
-		@param $var array
-		@param $col mixed
+	*	Retrieve values from a specified column of a multi-dimensional
+	*	array variable
+	*	@return array
+	*	@param $var array
+	*	@param $col mixed
 	**/
 	function pick(array $var,$col) {
 		return array_map(
@@ -33,9 +33,9 @@ class Matrix extends Prefab {
 	}
 
 	/**
-		Rotate a two-dimensional array variable
-		@return NULL
-		@param $var array
+	*	Rotate a two-dimensional array variable
+	*	@return NULL
+	*	@param $var array
 	**/
 	function transpose(array &$var) {
 		$out=array();
@@ -46,11 +46,11 @@ class Matrix extends Prefab {
 	}
 
 	/**
-		Sort a multi-dimensional array variable on a specified column
-		@return bool
-		@param $var array
-		@param $col mixed
-		@param $order int
+	*	Sort a multi-dimensional array variable on a specified column
+	*	@return bool
+	*	@param $var array
+	*	@param $col mixed
+	*	@param $order int
 	**/
 	function sort(array &$var,$col,$order=SORT_ASC) {
 		uasort(
@@ -68,17 +68,34 @@ class Matrix extends Prefab {
 	}
 
 	/**
-		Change the key of a two-dimensional array element
-		@return NULL
-		@param $var array
-		@param $old string
-		@param $new string
+	*	Change the key of a two-dimensional array element
+	*	@return NULL
+	*	@param $var array
+	*	@param $old string
+	*	@param $new string
 	**/
 	function changekey(array &$var,$old,$new) {
 		$keys=array_keys($var);
 		$vals=array_values($var);
 		$keys[array_search($old,$keys)]=$new;
 		$var=array_combine($keys,$vals);
+	}
+
+	/**
+	*	Return month calendar of specified date, with optional setting for
+	*	first day of week (0 for Sunday)
+	*	@return array
+	*	@param $date string
+	*	@param $first int
+	**/
+	function calendar($date='now',$first=0) {
+		$parts=getdate(strtotime($date));
+		$days=cal_days_in_month(CAL_GREGORIAN,$parts['mon'],$parts['year']);
+		$ref=date('w',strtotime(date('Y-m',$parts[0]).'-01'))+(7-$first)%7;
+		$out=array();
+		for ($i=0;$i<$days;$i++)
+			$out[floor(($ref+$i)/7)][($ref+$i)%7]=$i+1;
+		return $out;
 	}
 
 }
